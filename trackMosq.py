@@ -40,8 +40,10 @@ mosAge = 0      #### mosquito age in days
 mosDataName = 'test'
 frames = pims.ImageSequence(dataDir+'/*.tiff', as_grey=True)
 borderToExclude = 0     #### excludes the outer n pixels of the frame (in both x and y)
-startFrame = 100
-stopFrame = 300
+startFrame = 700
+stopFrame = 750
+startFrameBG = 1
+stopFrameBG = len(frames)
 searchRadius = 600
 
 
@@ -112,11 +114,10 @@ def trackMosq2(i, borderToExclude):
     return centroidsF, numCents
 
 
-framesToProcess = np.arange(0,2) ###frames to be processed in thousands (exclusive of last digit)
-
 centroidsAllT = np.zeros((1,3))
 num_cores = multiprocessing.cpu_count()
 
+# framesToProcess = np.arange(0,2) ###frames to be processed in thousands (exclusive of last digit)
 # for i in framesToProcess:
 #     BG = getBG((i * 1000) + 1, (i+1)*1000, 50)
 #     results = Parallel(n_jobs=num_cores)(delayed(trackMosq2)(i, borderToExclude) for i in tnrange((i * 1000) + 1, (i+1)*1000))
@@ -126,7 +127,7 @@ num_cores = multiprocessing.cpu_count()
 #     centroidsAllT = np.vstack((centroidsAllT,centroidsAllI))
 
 print('creating background images using frames ' + str(startFrame) + ' - ' + str(stopFrame))
-BG = getBG(startFrame, stopFrame, 30)
+BG = getBG(startFrameBG, stopFrameBG, 30)
 
 print('detecting centriods of mosquitoes in frames ' + str(startFrame) + ' - ' + str(stopFrame) + ' using ' + str(num_cores) + ' cores')
 

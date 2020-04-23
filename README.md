@@ -1,2 +1,2 @@
 # biteOscope
-scripts for running biteOscope and processing data
+Scripts for running biteOscope and processing data. 

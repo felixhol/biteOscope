@@ -47,8 +47,6 @@ def mosStatsAndCrop(tFull, p, ROIwidth, ROIheigth):
     os.mkdir(saveDir + mosDataName + 'crops_p' + str(p))
     frameWidth = 2048
     frameHeigth = 2048
-    # ROIwidth = 550
-    # ROIheigth = 550
     halfROIwidth = ROIwidth / 2
     halfROIheigth = ROIheigth / 2
     framesPerSecond = 10
