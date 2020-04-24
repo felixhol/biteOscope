@@ -1,0 +1,56 @@
+# Project definitions (do not edit)
+Task: aedes01
+scorer: felix
+date: Jan10
+
+# Project path (change when moving around)
+project_path: /Users/felix/biteOscope_repo/biteOscope/DLC_aedes/aedes01-felix-2020-01-10
+
+# Annotation data set configuration (and individual video cropping parameters)
+video_sets:
+  /Users/felix/biteOscope/DLC_aedes/videos/mockVideo01.mp4:
+  crop: 0, 550, 0, 550
+  /home/felix/biteOscope/DLC_aedes/videos/mockVideo02.mp4:
+  crop: 0, 550, 0, 550
+bodyparts:
+- rightForeleg
+- rightMiddleLeg
+- rightHindLeg
+- leftForeleg
+- leftMiddleLeg
+- leftHindLeg
+- proboscis
+- head
+- abdomen
+- bottom
+start: 0
+stop: 1
+numframes2pick: 20
+
+# Plotting configuration
+pcutoff: 0.1
+dotsize: 12
+alphavalue: 0.7
+colormap: jet
+
+# Training,Evaluation and Analysis configuration
+TrainingFraction:
+- 0.95
+iteration: 0
+resnet: 50
+snapshotindex: -1
+batch_size: 4
+
+# Cropping Parameters (for analysis and outlier frame detection)
+cropping: false
+#if cropping is true for analysis, then set the values here:
+x1: 0
+x2: 640
+y1: 277
+y2: 624
+
+# Refinement configuration (parameters from annotation dataset configuration also relevant in this stage)
+corner2move2:
+- 50
+- 50
+move2corner: true
