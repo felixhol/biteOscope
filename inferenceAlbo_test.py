@@ -1,3 +1,15 @@
+'''
+author: Felix Hol
+date: 2020 04 24
+content: runs DeepLabCut inference on timelapse images of mosquitoes using model trained on aegypti and ablopictus
+Takes cropped frames as input
+Output is:
+1) body part coordinates per DeepLabCut standards
+2) an .avi of the images (this is only used for make the labelled video and/or quick viewing, not for inference)
+3) labelled video
+'''
+
+
 import os
 os.environ["DLClight"]="True"
 
