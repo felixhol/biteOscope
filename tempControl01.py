@@ -1,3 +1,11 @@
+'''
+author: Felix Hol
+date: some time in 2018
+content: temperature control using a ds1820 temperature probe, a relay and peltier element (running on raspberry pi)
+depending on temperature reading, GPIO pins switch relay to heat peltier
+'''
+
+
 import os
 import glob
 import time
