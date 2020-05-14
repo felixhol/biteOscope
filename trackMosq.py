@@ -127,7 +127,7 @@ num_cores = multiprocessing.cpu_count()
 #     centroidsAllT = np.vstack((centroidsAllT,centroidsAllI))
 
 print('creating background images using frames ' + str(startFrame) + ' - ' + str(stopFrame))
-BG = getBG(startFrameBG, stopFrameBG, 30)
+BG = getBG(startFrameBG, stopFrameBG,  int(len(frames) / 30))
 
 print('detecting centriods of mosquitoes in frames ' + str(startFrame) + ' - ' + str(stopFrame) + ' using ' + str(num_cores) + ' cores')
 
@@ -157,6 +157,7 @@ tFull = tp.link_df(df_cenAllT, searchRadius, memory=3)
 
 tFull['species'] = species
 tFull['age'] = mosAge
+tFull = tFull.drop([0])
 
 trackPickleName = saveDir + mosDataName + '_tracks.pkl'
 tFull.to_pickle(trackPickleName)
