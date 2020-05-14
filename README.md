@@ -7,7 +7,7 @@ Scripts for running biteOscope and processing data.
 
 
 <p align="center">
-  <img width="414" height="202" src="/playground/stylet03.gif">
+  <img width="402" height="414" src="/playground/stylet03.gif">
 </p>
 
 <!-- ![alt text](/playground/stylet03.gif "Tracking image")
