@@ -44,6 +44,7 @@ startFrame = 700
 stopFrame = 750
 startFrameBG = 1
 stopFrameBG = len(frames)
+mThreshold = 100
 searchRadius = 600
 
 
@@ -63,7 +64,7 @@ def getBG(start, stop, step):
 
 #### get centroid coordinates
 
-def trackMosq2(i, borderToExclude):
+def trackMosq2(i, mThreshold, borderToExclude):
     frameSize = frames[1].shape
     # borderToExclude = 0
     selem1 = disk(8)
@@ -75,7 +76,7 @@ def trackMosq2(i, borderToExclude):
         Bm = B - B.min()
     else:
         Bm = B
-    Bt = Bm > 90
+    Bt = Bm > mThreshold
     Bts = remove_small_objects(Bt.astype(bool), min_size=400)
     Be = erosion(Bts, selem2)
     Bf = remove_small_objects(Be.astype(bool), min_size=300)
@@ -127,12 +128,12 @@ num_cores = multiprocessing.cpu_count()
 #     centroidsAllT = np.vstack((centroidsAllT,centroidsAllI))
 
 print('creating background images using frames ' + str(startFrame) + ' - ' + str(stopFrame))
-BG = getBG(startFrameBG, stopFrameBG,  int(len(frames) / 30))
+BG = getBG(startFrameBG, stopFrameBG,  int(stopFrameBG / 30))
 
 print('detecting centriods of mosquitoes in frames ' + str(startFrame) + ' - ' + str(stopFrame) + ' using ' + str(num_cores) + ' cores')
 
 
-results = Parallel(n_jobs=num_cores)(delayed(trackMosq2)(i, borderToExclude) for i in tqdm(range(startFrame, stopFrame)))
+results = Parallel(n_jobs=num_cores)(delayed(trackMosq2)(i, mThreshold, borderToExclude) for i in tqdm(range(startFrame, stopFrame)))
 
 centroidsAllT = np.zeros((1,3))
 
