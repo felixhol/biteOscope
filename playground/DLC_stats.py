@@ -27,6 +27,7 @@ maxMinW = 35
 bellyWindow = 50
 
 for dataFile in dataFiles:
+    print('processing: ' + dataFile)
     D = pd.read_hdf(dataFile)
     scorer=D.columns.get_level_values(0)[0]
     expt = os.path.splitext(os.path.basename(dataFile))[0]
@@ -46,11 +47,19 @@ for dataFile in dataFiles:
         indData.loc[ind, 'ID'] = ind
         indData.loc[ind, 'totDist'] = D[scorer][ind]['metrics'].distance.sum()
         indData.loc[ind, 'totTime'] = len(D.loc[D[scorer][ind]['thorax'].x > 0])
+        indData.loc[ind, 'engorged'] = 0
         if len(D.loc[D[scorer][ind]['thorax'].x > 0]) > minEngTime + 1:
             startI = D[scorer][ind]['metrics'].bellyWr.first_valid_index()
-            indData.loc[ind, 'bellyInc'] = D[scorer][ind]['metrics'].bellyWr.quantile(.8) / D[scorer][ind]['metrics'].bellyWr[startI : startI + minEngTime].quantile(.1)
-            indData.loc[ind, 'bellyMax09'] = D[scorer][ind]['metrics'].bellyWr.quantile(.9)
-            indData.loc[ind, 'bellyMin01'] = D[scorer][ind]['metrics'].bellyWr[startI : startI + minEngTime].quantile(.1)
+            if ~np.isnan(startI):
+                indData.loc[ind, 'bellyInc'] = D[scorer][ind]['metrics'].bellyWr.quantile(.8) / D[scorer][ind]['metrics'].bellyWr[startI : startI + minEngTime].quantile(.1)
+                indData.loc[ind, 'bellyMax09'] = D[scorer][ind]['metrics'].bellyWr.quantile(.9)
+                indData.loc[ind, 'bellyMin01'] = D[scorer][ind]['metrics'].bellyWr[startI : startI + minEngTime].quantile(.1)
+                if indData.loc[ind, 'bellyMax09'] > minEngW and indData.loc[ind, 'bellyMin01'] < maxMinW and indData.loc[ind, 'totTime'] > minEngTime:
+                    indData.loc[ind, 'engorged'] = 1
+                    indData.loc[ind, 'engorgeTime'] = D[scorer][ind]['metrics'].bellyWr.where(D[scorer][ind]['metrics'].bellyWr
+                                                                                          > indData.loc[ind, 'bellyMax09']).first_valid_index() - startI
+                    indData.loc[ind, 'engorgeTimeReal'] = D[scorer][ind]['metrics'].bellyWr.where(D[scorer][ind]['metrics'].bellyWr
+                                                                                          > indData.loc[ind, 'bellyMax09']).first_valid_index()
         else:
             indData.loc[ind, 'bellyInc'] = D[scorer][ind]['metrics'].bellyW.quantile(.8) / D[scorer][ind]['metrics'].bellyW.quantile(.1)
             indData.loc[ind, 'bellyMax09'] = D[scorer][ind]['metrics'].bellyW.quantile(.9)
@@ -59,11 +68,8 @@ for dataFile in dataFiles:
             indData.loc[ind, 'infected'] = 1
         elif 'ctrl' in expt:
             indData.loc[ind, 'infected'] = 0
-
     indData['meanSpeed'] = indData.totDist / indData.totTime
-    indData['engorged'] = 0
-    indData.loc[(indData['bellyInc'] > minEngInc) & (indData['bellyMax09'] > minEngW)
-                & (indData['bellyMin01'] < maxMinW) & (indData['totTime'] > minEngTime), 'engorged'] = 1
+
     newNameDLC = dataFile[:-3] + '_metrics.h5'
     D.to_hdf(newNameDLC, key="df_with_missing", mode="w")
     newNameInd = saveDir + expt[:20] + '_indData.pkl'
