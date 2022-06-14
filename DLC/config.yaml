@@ -1,0 +1,257 @@
+    # Project definitions (do not edit)
+Task: aedes
+scorer: bbb
+date: Nov16
+multianimalproject: true
+
+    # Project path (change when moving around)
+project_path: /home/felix/biteOscope/aedes-bbb-2020-11-16_05
+
+    # Annotation data set configuration (and individual video cropping parameters)
+video_sets:
+  /Users/felix/biteOscope/mockVideos/inv_1_cropped.avi:
+    crop: 0, 1024, 0, 1024
+  /Users/felix/biteOscope/mockVideos/inv_2_cropped.avi:
+    crop: 0, 1024, 0, 1024
+  /Users/felix/biteOscope/mockVideos/p3_1_cropped.avi:
+    crop: 0, 1024, 0, 1024
+  /Users/felix/biteOscope/mockVideos/p3_2_cropped.avi:
+    crop: 0, 1024, 0, 1024
+  /Users/felix/biteOscope/mockVideos/p3_3_cropped.avi:
+    crop: 0, 1024, 0, 1024
+  /home/felix/biteData/P3/201211_mp4/201211_KPPTN_denv5_6_cropped.mp4:
+    crop: 0, 1024, 0, 1024
+  /home/felix/biteData/P3/201211_mp4/201211_KPPTN_denv7_8_cropped.mp4:
+    crop: 0, 1024, 0, 1024
+  /home/felix/biteData/P3/201211_mp4/201211_KPPTN_ctrl7_8_cropped.mp4:
+    crop: 0, 1024, 0, 1024
+individuals:
+- m1
+- m2
+- m3
+- m4
+- m5
+- m6
+- m7
+- m8
+- m9
+- m10
+- m11
+- m12
+- m13
+- m14
+- m15
+- m16
+- m17
+uniquebodyparts: []
+multianimalbodyparts:
+- proboscis1
+- proboscis2
+- proboscis3
+- head
+- antennaR
+- antennaL
+- thorax
+- abdomenC
+- abdomenR
+- abdomenL
+- bottom
+- rightForeLeg1
+- rightForeLeg2
+- rightForeLeg3
+- rightForeLeg4
+- leftForeLeg1
+- leftForeLeg2
+- leftForeLeg3
+- leftForeLeg4
+- rightMidleg1
+- rightMidleg2
+- rightMidleg3
+- rightMidleg4
+- leftMidleg1
+- leftMidleg2
+- leftMidleg3
+- leftMidleg4
+- rightHindleg1
+- rightHindleg2
+- rightHindleg3
+- rightHindleg4
+- leftHindleg1
+- leftHindleg2
+- leftHindleg3
+- leftHindleg4
+skeleton:
+- - thorax
+  - abdomenR
+- - leftHindleg1
+  - leftHindleg3
+- - rightHindleg2
+  - rightHindleg3
+- - leftMidleg2
+  - leftMidleg4
+- - leftForeLeg4
+  - leftMidleg4
+- - leftForeLeg1
+  - leftForeLeg2
+- - abdomenL
+  - abdomenR
+- - proboscis3
+  - antennaL
+- - proboscis1
+  - head
+- - leftHindleg1
+  - leftHindleg2
+- - proboscis3
+  - antennaR
+- - head
+  - rightForeLeg4
+- - rightForeLeg4
+  - rightMidleg4
+- - proboscis2
+  - proboscis3
+- - leftForeLeg2
+  - leftForeLeg3
+- - leftHindleg2
+  - leftHindleg3
+- - thorax
+  - rightForeLeg4
+- - thorax
+  - abdomenC
+- - rightHindleg1
+  - rightHindleg3
+- - rightHindleg2
+  - rightHindleg4
+- - rightForeLeg2
+  - rightForeLeg3
+- - rightMidleg2
+  - rightMidleg3
+- - abdomenL
+  - bottom
+- - leftMidleg3
+  - leftMidleg4
+- - head
+  - thorax
+- - abdomenC
+  - bottom
+- - thorax
+  - rightMidleg4
+- - rightHindleg1
+  - rightHindleg2
+- - leftForeLeg2
+  - leftForeLeg4
+- - leftHindleg2
+  - leftHindleg4
+- - rightForeLeg1
+  - rightForeLeg3
+- - leftMidleg1
+  - leftMidleg3
+- - rightMidleg1
+  - rightMidleg3
+- - thorax
+  - leftForeLeg4
+- - rightForeLeg2
+  - rightForeLeg4
+- - rightMidleg2
+  - rightMidleg4
+- - rightHindleg3
+  - rightHindleg4
+- - thorax
+  - rightHindleg4
+- - abdomenR
+  - bottom
+- - proboscis3
+  - head
+- - thorax
+  - leftMidleg4
+- - rightForeLeg1
+  - rightForeLeg2
+- - rightMidleg1
+  - rightMidleg2
+- - leftMidleg1
+  - leftMidleg2
+- - head
+  - antennaL
+- - proboscis1
+  - proboscis2
+- - leftForeLeg3
+  - leftForeLeg4
+- - leftHindleg3
+  - leftHindleg4
+- - abdomenC
+  - abdomenR
+- - abdomenC
+  - abdomenL
+- - thorax
+  - abdomenL
+- - leftForeLeg1
+  - leftForeLeg3
+- - rightForeLeg3
+  - rightForeLeg4
+- - rightMidleg3
+  - rightMidleg4
+- - leftMidleg4
+  - leftHindleg4
+- - leftMidleg2
+  - leftMidleg3
+- - head
+  - leftForeLeg4
+- - thorax
+  - leftHindleg4
+- - head
+  - antennaR
+- - proboscis1
+  - proboscis3
+- - rightMidleg4
+  - rightHindleg4
+bodyparts: MULTI!
+start: 0
+stop: 1
+numframes2pick: 6
+
+    # Plotting configuration
+skeleton_color: black
+pcutoff: 0.1
+dotsize: 3
+alphavalue: 0.7
+colormap: plasma
+
+    # Training,Evaluation and Analysis configuration
+TrainingFraction:
+- 0.9
+iteration: 1
+default_net_type: resnet_50
+default_augmenter: multi-animal-imgaug
+snapshotindex: -1
+batch_size: 8
+
+    # Cropping Parameters (for analysis and outlier frame detection)
+cropping: false
+croppedtraining: true
+    #if cropping is true for analysis, then set the values here:
+x1: 0
+x2: 640
+y1: 277
+y2: 624
+
+    # Refinement configuration (parameters from annotation dataset configuration also relevant in this stage)
+corner2move2:
+- 50
+- 50
+move2corner: true
+video_sets_original:
+  /Users/felix/biteOscope/mockVideos/p3_1.avi:
+    crop: 0, 3036, 0, 3036
+  /Users/felix/biteOscope/mockVideos/p3_2.avi:
+    crop: 0, 3036, 0, 3036
+  /Users/felix/biteOscope/mockVideos/p3_3.avi:
+    crop: 0, 3036, 0, 3036
+  /Users/felix/biteOscope/mockVideos/inv_1.avi:
+    crop: 0, 2048, 0, 2048
+  /Users/felix/biteOscope/mockVideos/inv_2.avi:
+    crop: 0, 2048, 0, 2048
+  /home/felix/biteData/P3/201211_mp4/201211_KPPTN_denv5_6.mp4:
+    crop: 0, 3036, 0, 3036
+  /home/felix/biteData/P3/201211_mp4/201211_KPPTN_denv7_8.mp4:
+    crop: 0, 3036, 0, 3036
+  /home/felix/biteData/P3/201211_mp4/201211_KPPTN_ctrl7_8.mp4:
+    crop: 0, 3036, 0, 3036
